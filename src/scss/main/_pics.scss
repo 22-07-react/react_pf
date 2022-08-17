@@ -1,0 +1,30 @@
+#pics {
+	width: 100%;
+	height: 100vh;
+	padding: 10vw;
+	background: lightgreen;
+	position: relative;
+
+	h1 {
+		font: bold 160px/1 'arial';
+		color: #fff;
+		text-shadow: 20px 20px 50px rgba(0, 0, 0, 0.4);
+		position: relative;
+		z-index: 2;
+	}
+	h2 {
+		font: bold 200px/1 'arial';
+		color: rgba(0, 0, 0, 0.3);
+		position: absolute;
+		top: 80px;
+		left: 0px;
+	}
+	.box {
+		width: 400px;
+		height: 400px;
+		position: absolute;
+		bottom: 200px;
+		right: 200px;
+		background: hotpink;
+	}
+}

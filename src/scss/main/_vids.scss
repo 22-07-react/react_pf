@@ -1,0 +1,72 @@
+#vids {
+	width: 100%;
+	height: 100vh;
+	background: lightblue;
+
+	.swiper {
+		height: 100%;
+		padding: 10vw 0px;
+
+		.swiper-slide {
+			width: 100%;
+
+			.inner {
+				width: 100%;
+				height: 100%;
+				background: #fff;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: #333;
+				font: bold 50px/1 'arial';
+				transform: scale(0.8);
+				opacity: 0.5;
+				transition: opacity 0.5s, transform 0.5s;
+			}
+		}
+		//활성화 패널 스타일
+		.swiper-slide-active {
+			.inner {
+				transform: scale(1);
+				opacity: 1;
+			}
+		}
+
+		.swiper-pagination {
+			bottom: 30px;
+
+			.swiper-pagination-bullet {
+				width: 10px;
+				height: 10px;
+				border-radius: 5px;
+				background: #fff;
+				margin: 0px 10px;
+				opacity: 0.5;
+				transition: 0.5s;
+			}
+			.swiper-pagination-bullet-active {
+				width: 100px;
+				opacity: 1;
+			}
+		}
+
+		.swiper-button-next {
+			top: auto;
+			bottom: 20px;
+			left: auto;
+			right: 50px;
+			transform: scale(0.6);
+			filter: grayscale(1) brightness(3);
+			z-index: 11;
+		}
+		.swiper-button-prev {
+			top: auto;
+			bottom: 20px;
+			left: auto;
+			right: 100px;
+			transform: scale(0.6);
+			filter: grayscale(1) brightness(3);
+			z-index: 11;
+		}
+	}
+}

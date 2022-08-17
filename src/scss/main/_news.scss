@@ -1,0 +1,44 @@
+#news {
+	width: 100%;
+	height: 100vh;
+	padding: 10vw;
+	background: lightgoldenrodyellow;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	gap: 20px;
+	perspective: 600px;
+
+	h1 {
+		width: 100%;
+		font: 50px/1 'arial';
+		color: #555;
+		margin-bottom: 40px;
+		text-align: center;
+	}
+
+	article {
+		width: 15vw;
+		height: 200px;
+		padding: 30px;
+		border: 1px solid #888;
+		transform: translateY(100px) rotateY(220deg);
+		opacity: 0;
+		transition: 0.5s;
+
+		//반복문을 이용해서 0.2초씩 delay값 적용
+		@for $i from 1 through 4 {
+			&:nth-of-type(#{$i}) {
+				transition-delay: 0.2s * ($i - 1);
+			}
+		}
+	}
+
+	&.on {
+		article {
+			transform: translateY(0px) rotateY(0deg);
+			opacity: 1;
+		}
+	}
+}
