@@ -1,2 +1,46 @@
 .Gallery {
+	.frame {
+		transition: transform 2s, opacity 2s;
+		transform: translateY(200px);
+		opacity: 0;
+
+		&.on {
+			transform: translateY(0px);
+			opacity: 1;
+		}
+
+		&::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+
+		article {
+			width: 25%;
+			padding: 10px;
+			float: left;
+
+			.inner {
+				width: 100%;
+				padding: 10px;
+				background: #fff;
+				box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+
+				.pic {
+					width: 100%;
+					margin-bottom: 5px;
+
+					img {
+						width: 100%;
+					}
+				}
+
+				h2 {
+					font: normal 14px/1.2 'arial';
+					color: #777;
+					margin-bottom: 30px;
+				}
+			}
+		}
+	}
 }

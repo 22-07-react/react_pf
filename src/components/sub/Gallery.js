@@ -7,7 +7,6 @@ function Gallery() {
 	const key = '4612601b324a2fe5a1f5f7402bf8d87a';
 	const method_interest = 'flickr.interestingness.getList';
 	const num = 20;
-	const id = '164021883@N04';
 	const url = `https://www.flickr.com/services/rest/?method=${method_interest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
 
 	const [Items, setItems] = useState([]);
@@ -24,7 +23,7 @@ function Gallery() {
 	return (
 		<>
 			<Layout name={'Gallery'}>
-				<div className='frame'>
+				<div className='frame on'>
 					{Items.map((pic, idx) => {
 						return (
 							<article
