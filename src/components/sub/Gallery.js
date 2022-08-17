@@ -5,10 +5,10 @@ import { useEffect, useState } from 'react';
 
 function Gallery() {
 	const key = '4612601b324a2fe5a1f5f7402bf8d87a';
-	const method = 'flickr.people.getPhotos';
-	const num = 8;
+	const method_interest = 'flickr.interestingness.getList';
+	const num = 20;
 	const id = '164021883@N04';
-	const url = `https://www.flickr.com/services/rest/?method=${method}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&user_id=${id}`;
+	const url = `https://www.flickr.com/services/rest/?method=${method_interest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
 
 	const [Items, setItems] = useState([]);
 	const [Index, setIndex] = useState(0);
@@ -24,24 +24,28 @@ function Gallery() {
 	return (
 		<>
 			<Layout name={'Gallery'}>
-				{Items.map((pic, idx) => {
-					return (
-						<article
-							key={idx}
-							onClick={() => {
-								setIndex(idx);
-								setOpen(true);
-							}}>
-							<div className='pic'>
-								<img
-									src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`}
-									alt={pic.title}
-								/>
-							</div>
-							<h2>{pic.title}</h2>
-						</article>
-					);
-				})}
+				<div className='frame'>
+					{Items.map((pic, idx) => {
+						return (
+							<article
+								key={idx}
+								onClick={() => {
+									setIndex(idx);
+									setOpen(true);
+								}}>
+								<div className='inner'>
+									<div className='pic'>
+										<img
+											src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`}
+											alt={pic.title}
+										/>
+									</div>
+									<h2>{pic.title}</h2>
+								</div>
+							</article>
+						);
+					})}
+				</div>
 			</Layout>
 
 			{Open && (
