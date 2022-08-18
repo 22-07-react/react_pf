@@ -31,6 +31,7 @@ function Gallery() {
 
 		await axios.get(url).then((json) => {
 			console.log(json.data.photos.photo);
+			if (json.data.photos.photo.length === 0) return alert('해당 검색어의 결과값이 없습니다.');
 			setItems(json.data.photos.photo);
 		});
 
