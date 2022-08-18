@@ -1,19 +1,19 @@
 import Layout from '../common/Layout';
 import Pop from '../common/Pop';
-//npm i react-masonry-component
 import Masonry from 'react-masonry-component';
 import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 
 function Gallery() {
 	const frame = useRef(null);
+	const input = useRef(null);
 	const [Items, setItems] = useState([]);
 	const [Index, setIndex] = useState(0);
 	const [Open, setOpen] = useState(false);
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(false);
 	const masonryOptions = { transitionDuration: '0.5s' };
-	const num = 500;
+	const num = 50;
 	const user = '164021883@N04';
 
 	const getFlickr = async (opt) => {
@@ -22,7 +22,6 @@ function Gallery() {
 		const method_user = 'flickr.people.getPhotos';
 		const method_search = 'flickr.photos.search';
 		let url = '';
-		//객체로 전달되는 type에 따라 호출한 URL을 새로 만들고 axios에 전달
 		if (opt.type === 'interest')
 			url = `https://www.flickr.com/services/rest/?method=${method_interest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
 		if (opt.type === 'user')
@@ -42,7 +41,6 @@ function Gallery() {
 		}, 1000);
 	};
 
-	//처음  호출시에는 interest방식으로 호출
 	useEffect(() => getFlickr({ type: 'interest' }), []);
 
 	return (
@@ -53,7 +51,6 @@ function Gallery() {
 						if (!EnableClick) return;
 						setLoading(true);
 						frame.current.classList.remove('on');
-						//user 갤러리 호출시에는 추가로 user키값에 검색하고자 하는 유저아이디 전달
 						getFlickr({ type: 'user', user: user });
 						setEnableClick(false);
 					}}>
@@ -70,6 +67,23 @@ function Gallery() {
 					}}>
 					Interest Gallery
 				</button>
+
+				<div className='searchBox'>
+					<input type='text' ref={input} />
+					<button
+						onClick={() => {
+							const result = input.current.value.trim();
+							if (!result) return alert('검색어를 입력하세요');
+							if (!EnableClick) return;
+							setEnableClick(false);
+							setLoading(true);
+							frame.current.classList.remove('on');
+							getFlickr({ type: 'search', tag: result });
+							input.current.value = '';
+						}}>
+						search
+					</button>
+				</div>
 
 				{Loading && <img className='loading' src={process.env.PUBLIC_URL + '/img/loading.gif'} />}
 
