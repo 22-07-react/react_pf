@@ -4,9 +4,12 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { useRef } from 'react';
 import Menu from './Menu';
 
 function Header({ type }) {
+	//menu컴포넌트에 전달해주는 토글 기능을 담을 참조객체 생성
+	const menu = useRef(null);
 	const active = { color: '#000' };
 	let logoURL = '';
 	type === 'main' ? (logoURL = '/img/logo_w.png') : (logoURL = '/img/logo_b.png');
@@ -67,9 +70,11 @@ function Header({ type }) {
 				</ul>
 			</nav>
 
-			<FontAwesomeIcon icon={faBars} />
+			{/* 토글버튼 클릭시 참조된 토글함수 호출 */}
+			<FontAwesomeIcon icon={faBars} onClick={() => menu.current.toggle()} />
 
-			<Menu />
+			{/* 메뉴컴포넌트를 참조객체에 연결 (토글기능함수) */}
+			<Menu ref={menu} />
 		</header>
 	);
 }

@@ -2,9 +2,17 @@ import { useState, forwardRef, useImperativeHandle } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NavLink, Link } from 'react-router-dom';
 
-function Menu() {
-	const [Open, setOpen] = useState(true);
+//Memu컴포넌트를 화살표함수로 변경해서 forwardRef메서드의 인수로 전달
+const Menu = forwardRef((props, ref) => {
+	const [Open, setOpen] = useState(false);
 	const active = { color: 'orange' };
+
+	//부모컴포넌트의 참조객체에 담길 객체를 리턴 (Open값을 토글시켜주는 함수)
+	useImperativeHandle(ref, () => {
+		return {
+			toggle: () => setOpen(!Open),
+		};
+	});
 
 	return (
 		<AnimatePresence>
@@ -52,6 +60,6 @@ function Menu() {
 			)}
 		</AnimatePresence>
 	);
-}
+});
 
 export default Menu;
