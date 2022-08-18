@@ -41,48 +41,47 @@ function Gallery() {
 		}, 1000);
 	};
 
+	//interest요청 함수
+	const showInterest = () => {
+		if (!EnableClick) return;
+		setLoading(true);
+		frame.current.classList.remove('on');
+		getFlickr({ type: 'interest' });
+		setEnableClick(false);
+	};
+
+	//search요청 함수
+	const showSearch = () => {
+		const result = input.current.value.trim();
+		if (!result) return alert('검색어를 입력하세요');
+		if (!EnableClick) return;
+		setEnableClick(false);
+		setLoading(true);
+		frame.current.classList.remove('on');
+		getFlickr({ type: 'search', tag: result });
+		input.current.value = '';
+	};
+
+	//user요청 함수
+	const showUser = () => {
+		if (!EnableClick) return;
+		setLoading(true);
+		frame.current.classList.remove('on');
+		getFlickr({ type: 'user', user: user });
+		setEnableClick(false);
+	};
+
 	useEffect(() => getFlickr({ type: 'interest' }), []);
 
 	return (
 		<>
 			<Layout name={'Gallery'}>
-				<button
-					onClick={() => {
-						if (!EnableClick) return;
-						setLoading(true);
-						frame.current.classList.remove('on');
-						getFlickr({ type: 'user', user: user });
-						setEnableClick(false);
-					}}>
-					My Gallery
-				</button>
-
-				<button
-					onClick={() => {
-						if (!EnableClick) return;
-						setLoading(true);
-						frame.current.classList.remove('on');
-						getFlickr({ type: 'interest' });
-						setEnableClick(false);
-					}}>
-					Interest Gallery
-				</button>
+				<button onClick={showUser}>My Gallery</button>
+				<button onClick={showInterest}>Interest Gallery</button>
 
 				<div className='searchBox'>
 					<input type='text' ref={input} />
-					<button
-						onClick={() => {
-							const result = input.current.value.trim();
-							if (!result) return alert('검색어를 입력하세요');
-							if (!EnableClick) return;
-							setEnableClick(false);
-							setLoading(true);
-							frame.current.classList.remove('on');
-							getFlickr({ type: 'search', tag: result });
-							input.current.value = '';
-						}}>
-						search
-					</button>
+					<button onClick={showSearch}>search</button>
 				</div>
 
 				{Loading && <img className='loading' src={process.env.PUBLIC_URL + '/img/loading.gif'} />}
