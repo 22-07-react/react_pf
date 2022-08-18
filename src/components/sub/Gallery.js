@@ -80,7 +80,13 @@ function Gallery() {
 				<button onClick={showInterest}>Interest Gallery</button>
 
 				<div className='searchBox'>
-					<input type='text' ref={input} />
+					<input
+						type='text'
+						ref={input}
+						onKeyUp={(e) => {
+							if (e.key === 'Enter') showSearch();
+						}}
+					/>
 					<button onClick={showSearch}>search</button>
 				</div>
 
@@ -125,3 +131,9 @@ function Gallery() {
 }
 
 export default Gallery;
+
+/*
+	onKeyDown //키를 누를때
+	onKeyUp //키를 눌렀다 땠을때 (추천)
+	onKeyPress //눌렀다 땠을때 (한글자판에서는 안먹는 키가 있음)
+*/
