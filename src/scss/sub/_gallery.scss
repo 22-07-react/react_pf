@@ -47,6 +47,27 @@
 					color: #777;
 					margin-bottom: 30px;
 				}
+
+				.profile {
+					display: flex;
+					align-items: center;
+
+					img {
+						width: 40px;
+						border-radius: 50%;
+						margin-right: 10px;
+					}
+					span {
+						color: orange;
+						cursor: pointer;
+						transition: 0.5s;
+						font-size: 12px;
+
+						&:hover {
+							color: cornflowerblue;
+						}
+					}
+				}
 			}
 		}
 	}

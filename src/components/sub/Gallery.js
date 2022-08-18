@@ -22,12 +22,15 @@ function Gallery() {
 		const method_user = 'flickr.people.getPhotos';
 		const method_search = 'flickr.photos.search';
 		let url = '';
-		if (opt.type === 'interest')
+		if (opt.type === 'interest') {
 			url = `https://www.flickr.com/services/rest/?method=${method_interest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
-		if (opt.type === 'user')
+		}
+		if (opt.type === 'user') {
 			url = `https://www.flickr.com/services/rest/?method=${method_user}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&user_id=${opt.user}`;
-		if (opt.type === 'search')
+		}
+		if (opt.type === 'search') {
 			url = `https://www.flickr.com/services/rest/?method=${method_search}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&tags=${opt.tag}`;
+		}
 
 		await axios.get(url).then((json) => {
 			console.log(json.data.photos.photo);
@@ -111,6 +114,19 @@ function Gallery() {
 											/>
 										</div>
 										<h2>{pic.title}</h2>
+										<div className='profile'>
+											<img
+												src={`http://farm${pic.farm}.staticflickr.com/${pic.server}/buddyicons/${pic.owner}.jpg`}
+												alt={pic.owner}
+												onError={(e) => {
+													e.target.setAttribute(
+														'src',
+														'https://www.flickr.com/images/buddyicon.gif'
+													);
+												}}
+											/>
+											<span>{pic.owner}</span>
+										</div>
 									</div>
 								</article>
 							);
