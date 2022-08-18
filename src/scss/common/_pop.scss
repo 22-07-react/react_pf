@@ -13,11 +13,15 @@
 		height: 100%;
 
 		video,
-		iframe,
-		img {
+		iframe {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+		}
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
 		}
 	}
 	.close {
