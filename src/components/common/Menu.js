@@ -9,7 +9,7 @@ function Menu() {
 	return (
 		<AnimatePresence>
 			{Open && (
-				<nav>
+				<nav id='mobileGnb'>
 					<h1>
 						<Link to='/'>
 							<img src={process.env.PUBLIC_URL + '/img/logo_w.png'} alt='logo' />
@@ -18,22 +18,34 @@ function Menu() {
 
 					<ul>
 						<li>
-							<NavLink to='/department'>DEPARTMENT</NavLink>
+							<NavLink to='/department' activeStyle={active}>
+								DEPARTMENT
+							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/community'>COMMUNITY</NavLink>
+							<NavLink to='/community' activeStyle={active}>
+								COMMUNITY
+							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/gallery'>GALLERY</NavLink>
+							<NavLink to='/gallery' activeStyle={active}>
+								GALLERY
+							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/youtube'>YOUTUBE</NavLink>
+							<NavLink to='/youtube' activeStyle={active}>
+								YOUTUBE
+							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/location'>LOCATION</NavLink>
+							<NavLink to='/location' activeStyle={active}>
+								LOCATION
+							</NavLink>
 						</li>
 						<li>
-							<NavLink to='/members'>MEMBERS</NavLink>
+							<NavLink to='/members' activeStyle={active}>
+								MEMBERS
+							</NavLink>
 						</li>
 					</ul>
 				</nav>
