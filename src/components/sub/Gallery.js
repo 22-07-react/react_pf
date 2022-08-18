@@ -7,7 +7,6 @@ import { useEffect, useState, useRef } from 'react';
 function Gallery() {
 	const frame = useRef(null);
 	const input = useRef(null);
-	//추후 자식컴포넌트인 Pop에서 forwardRef로 전달되는 객체값을 참조하기위한 빈 참조객체 생성
 	const pop = useRef(null);
 	const [Items, setItems] = useState([]);
 	const [Index, setIndex] = useState(0);
@@ -134,10 +133,7 @@ function Gallery() {
 				</div>
 			</Layout>
 
-			{/* Pop컴포넌트에 참조객체 pop연결 - 원래 컴포넌트에는 참조객체연결이 불가하나 forwardRef로 전달되고 있으면 참조가능 */}
 			<Pop ref={pop}>
-				{/* Pop의 틀 자체는 부모요소에 계속 마운트되어 있다보니 아직 Items의 값이 불러와지지 않았을떄에는 오류 발생  */}
-				{/* Items의 값이 비어있지 않을떄 img에 Pop에 출력되도록 설정 */}
 				{Items.length !== 0 && (
 					<img
 						src={`https://live.staticflickr.com/${Items[Index].server}/${Items[Index].id}_${Items[Index].secret}_b.jpg`}
@@ -150,9 +146,3 @@ function Gallery() {
 }
 
 export default Gallery;
-
-/*
-	onKeyDown //키를 누를때
-	onKeyUp //키를 눌렀다 땠을때 (추천)
-	onKeyPress //눌렀다 땠을때 (한글자판에서는 안먹는 키가 있음)
-*/
