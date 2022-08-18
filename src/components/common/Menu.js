@@ -1,6 +1,7 @@
 import { useState, forwardRef, useImperativeHandle } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { NavLink, Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 //Memu컴포넌트를 화살표함수로 변경해서 forwardRef메서드의 인수로 전달
 const Menu = forwardRef((props, ref) => {
@@ -13,6 +14,13 @@ const Menu = forwardRef((props, ref) => {
 			toggle: () => setOpen(!Open),
 		};
 	});
+
+	useEffect(() => {
+		window.addEventListener('resize', () => {
+			const wid = window.innerWidth;
+			if (wid >= 1280) setOpen(false);
+		});
+	}, []);
 
 	return (
 		<AnimatePresence>
