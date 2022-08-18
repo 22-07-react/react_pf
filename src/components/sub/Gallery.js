@@ -10,13 +10,13 @@ function Gallery() {
 	const [Items, setItems] = useState([]);
 	const [Index, setIndex] = useState(0);
 	const [Open, setOpen] = useState(false);
-	//masonry 전환속도 옵션객체 설정
+	const [Loading, setLoading] = useState(true);
 	const masonryOptions = { transitionDuration: '0.5s' };
 
 	const key = '4612601b324a2fe5a1f5f7402bf8d87a';
 	const method_interest = 'flickr.interestingness.getList';
 	const method_user = 'flickr.people.getPhotos';
-	const num = 20;
+	const num = 500;
 	const user = '164021883@N04';
 	const url_interest = `https://www.flickr.com/services/rest/?method=${method_interest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
 	const url_user = `https://www.flickr.com/services/rest/?method=${method_user}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&user_id=${user}`;
@@ -27,7 +27,11 @@ function Gallery() {
 			setItems(json.data.photos.photo);
 		});
 
-		frame.current.classList.add('on');
+		//masonry 박스정렬시간동안 기다린후 리스트 출력
+		setTimeout(() => {
+			frame.current.classList.add('on');
+			setLoading(false);
+		}, 1000);
 	};
 
 	useEffect(() => getFlickr(url_interest), []);
@@ -37,6 +41,7 @@ function Gallery() {
 			<Layout name={'Gallery'}>
 				<button
 					onClick={() => {
+						setLoading(true);
 						frame.current.classList.remove('on');
 						getFlickr(url_user);
 					}}>
@@ -45,14 +50,16 @@ function Gallery() {
 
 				<button
 					onClick={() => {
+						setLoading(true);
 						frame.current.classList.remove('on');
 						getFlickr(url_interest);
 					}}>
 					Interest Gallery
 				</button>
 
+				{Loading && <img className='loading' src={process.env.PUBLIC_URL + '/img/loading.gif'} />}
+
 				<div className='frame' ref={frame}>
-					{/* masonry를 적용한 요소들의 부모컴포넌트를 Masonry로 만들고 태그명 지정하고 옵션객체 연결 */}
 					<Masonry elementType={'div'} options={masonryOptions}>
 						{Items.map((pic, idx) => {
 							return (
