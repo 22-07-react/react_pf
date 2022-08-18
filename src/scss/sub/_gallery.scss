@@ -51,3 +51,26 @@
 		}
 	}
 }
+
+@media screen and (max-width: $web_s) {
+	.Gallery .frame article {
+		width: 25%;
+	}
+}
+
+@media screen and (max-width: $tablet) {
+	.Gallery .frame article {
+		width: 33.333%;
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.Gallery .frame article {
+		width: 50%;
+	}
+}
+@media screen and (max-width: $mobile_s) {
+	.Gallery .frame article {
+		width: 100%;
+	}
+}
