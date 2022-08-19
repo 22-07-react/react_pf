@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setYoutube } from './redux/action';
+import { setYoutube, setMembers } from './redux/action';
 import axios from 'axios';
 
 //common
@@ -35,8 +35,16 @@ function App() {
 		});
 	};
 
+	const getMembers = async () => {
+		const url = process.env.PUBLIC_URL + '/DB/members.json';
+		await axios.get(url).then((json) => {
+			dispatch(setMembers(json.data.members));
+		});
+	};
+
 	useEffect(() => {
 		getYoutube();
+		getMembers();
 	}, []);
 
 	return (
