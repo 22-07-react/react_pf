@@ -66,12 +66,12 @@
 
     //Promise.all()로 loadImg, loadVid함수가 모두 프로미스 객체를 반환할때까지 기다린후 동기화 처리
     Promise.all([loadImg(), loadVid()]).then(result => {
-      console.log(result); //[true, true]
+      //console.log(result); //[true, true]
       const [loadedImg, loadedVid] = result;
 
       //두함수의 반환값이 모두 true이면 (영상, 이미지가 모두 로딩완료되면)
       if (loadedImg && loadedVid) {
-        console.log('mask-hide');
+        //console.log('mask-hide');
         mask.classList.add('off');
 
         setTimeout(() => {
