@@ -7,13 +7,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>React App</title>
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0aed7cff3e69be6d99e79138ccf791f5"></script>
+  <style>
+    .defaults {
+      position: absolute;
+      top: -999999px;
+    }
+
+    .mask {
+      width: 100%;
+      height: 100vh;
+      background: #111;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 5;
+      opacity: 1;
+      transition: opacity 2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font: 20px/1 'arial';
+      color: #fff;
+    }
+  </style>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
   <div class="defaults"></div>
-  <div class="mask"></div>
+  <div class="mask">LOADING...</div>
 
   <script>
     const defaults = document.querySelector('.defaults');
@@ -65,5 +88,12 @@
   CSR
   -장점: 애초에 모든 컴포넌트파일을 초기에 가져오기 때문에 페이지 이동시 페이지전환 로딩이 없음
   -단점: 초기로딩속도가 김, SEO에 취약
+
+  이미지, 영상 미리 SSR방식으로 캐싱처리하는 작업흐름
+  1.배열에 캐싱할 이미지와 영상의 소스 URL을 각각 담아놓음
+  2.동적으로 배열에 이미지, 영성소를 반복돌면서 index.html안쪽에 강제DOM생성
+  3.DOM이 index.html에 생성되는 동안 마스크화면 대신 보여줌
+  4.모든 영상, 이미지가 캐싱완료되면 마스크를 강제 제거하고 동적으로 생성한요소제거
+  5.그사이 React컴포넌트들이 리얼돔으로 변환되서 화면에 출력
 
  -->
