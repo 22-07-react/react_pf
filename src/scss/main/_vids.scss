@@ -15,13 +15,31 @@
 				height: 100%;
 				background: #fff;
 				display: flex;
+				flex-wrap: wrap;
 				justify-content: center;
-				align-items: center;
+				align-content: center;
 				color: #333;
 				font: bold 50px/1 'arial';
 				transform: scale(0.8);
 				opacity: 0.5;
 				transition: opacity 0.5s, transform 0.5s;
+				padding: 30px;
+
+				.pic {
+					width: 100%;
+					height: 40%;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
+				}
+				h2 {
+					font: normal 40px/1 'work sans';
+					color: #111;
+					margin-top: 15px;
+				}
 			}
 		}
 		//활성화 패널 스타일
