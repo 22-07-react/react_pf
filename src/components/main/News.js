@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function News() {
-	//로컬스토리지에 있는 데이터를 가져와서 다시 JSON객체로 parsing해서 리턴하는 함수
+	const path = process.env.PUBLIC_URL;
+	const Members = useSelector((store) => store.memberReducer.members);
+
 	const getLocalData = () => {
 		const dummyPosts = [
 			{ title: 'Hello5', content: 'Here comes description in detail.' },
@@ -18,7 +21,6 @@ function News() {
 			return dummyPosts;
 		}
 	};
-
 	const [Posts] = useState(getLocalData());
 
 	useEffect(() => {
@@ -38,6 +40,17 @@ function News() {
 					</article>
 				);
 			})}
+
+			<ul>
+				{Members.map((member) => {
+					return (
+						<li key={member.name}>
+							<img src={`${path}/img/${member.pic}`} alt={member.name} />
+							<p>{member.name}</p>
+						</li>
+					);
+				})}
+			</ul>
 		</section>
 	);
 }
