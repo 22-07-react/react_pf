@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper';
+import { Pagination, Navigation, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -11,7 +11,8 @@ function Vids() {
 	return (
 		<section id='vids' className='myScroll'>
 			<Swiper
-				modules={[Pagination, Navigation]}
+				modules={[Pagination, Navigation, Autoplay]}
+				autoplay={{ delay: 2000, disableOnInteraction: true }}
 				pagination={{ clickable: true }}
 				navigation={true}
 				spaceBetween={50}
