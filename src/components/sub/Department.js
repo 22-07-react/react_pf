@@ -1,16 +1,9 @@
 import Layout from '../common/Layout';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function Department() {
 	const path = process.env.PUBLIC_URL;
-	const [Members, setMembers] = useState([]);
-
-	useEffect(() => {
-		axios.get(path + '/DB/members.json').then((json) => {
-			setMembers(json.data.members);
-		});
-	}, []);
+	const Members = useSelector((store) => store.memberReducer.members);
 
 	return (
 		<Layout name={'Department'}>
@@ -19,16 +12,10 @@ function Department() {
 					<div className='inner'>
 						<div className='picFrame'>
 							<div className='reflect'>
-								<img
-									src={`${path}/img/${member.pic}`}
-									alt={member.name}
-								/>
+								<img src={`${path}/img/${member.pic}`} alt={member.name} />
 							</div>
 							<div className='pic'>
-								<img
-									src={`${path}/img/${member.pic}`}
-									alt={member.name}
-								/>
+								<img src={`${path}/img/${member.pic}`} alt={member.name} />
 							</div>
 						</div>
 						<h2>{member.name}</h2>
