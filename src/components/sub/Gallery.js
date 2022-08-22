@@ -11,7 +11,7 @@ function Gallery() {
 	const pop = useRef(null);
 	//store에 있는 flickr데이터를 가져옴 (처음 사이클에서는 빈배열  가져옴)
 	const Pics = useSelector((store) => store.flickrReducer.flickr);
-	console.log(Pics);
+
 	const [Index, setIndex] = useState(0);
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(false);
@@ -48,11 +48,22 @@ function Gallery() {
 		setEnableClick(false);
 	};
 
+	//데이터가 로딩완료되면 로딩바 제거하고 frame출력하는 함수
+	const endLoading = () => {
+		setTimeout(() => {
+			frame.current.classList.add('on');
+			setLoading(false);
+			setTimeout(() => setEnableClick(true), 600);
+		}, 1000);
+	};
+
 	//Opt값이 변경될떄마다 dispath로 변경된 해당 Opt값을 Flickr_start액션객체에 담아서 saga에 전달
 	useEffect(() => {
-		console.log(Opt);
 		dispatch({ type: 'FLICKR_START', Opt });
 	}, [Opt]);
+
+	//flickr데이터가 변경될때마다 (새로운데이터 요청을 해서 해당 요청이 완료될때마다) 로딩제거함수 호출
+	useEffect(endLoading, [Pics]);
 
 	return (
 		<>
