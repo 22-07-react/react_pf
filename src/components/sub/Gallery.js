@@ -11,11 +11,11 @@ function Gallery() {
 	const pop = useRef(null);
 	//store에 있는 flickr데이터를 가져옴 (처음 사이클에서는 빈배열  가져옴)
 	const Pics = useSelector((store) => store.flickrReducer.flickr);
+	console.log(Pics);
 	const [Index, setIndex] = useState(0);
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(false);
 	const masonryOptions = { transitionDuration: '0.5s' };
-	const num = 50;
 	const user = '164021883@N04';
 	//saga로 전달될 axios호출시 필요한 옵션값이 담길 state
 	const [Opt, setOpt] = useState({ type: 'user', user: user });
@@ -50,7 +50,8 @@ function Gallery() {
 
 	//Opt값이 변경될떄마다 dispath로 변경된 해당 Opt값을 Flickr_start액션객체에 담아서 saga에 전달
 	useEffect(() => {
-		dispatch({ type: 'FLICK_START', Opt });
+		console.log(Opt);
+		dispatch({ type: 'FLICKR_START', Opt });
 	}, [Opt]);
 
 	return (

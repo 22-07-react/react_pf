@@ -3,6 +3,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducer';
 //saga 미들웨어 import
 import createSagaMiddleware from '@redux-saga/core';
+
 //미들웨어에 적용할 saga파일 import
 import rootSaga from './saga';
 
