@@ -24,27 +24,9 @@ import './scss/style.scss';
 function App() {
 	const dispatch = useDispatch();
 
-	const getYoutube = async () => {
-		const key = 'AIzaSyCMfwz2923Ts1sPkx0J7I0mnMHPmYKw4vo';
-		const playlist = 'PLHtvRFLN5v-VD95TBpr5Dh2zguWCjjmMG';
-		const num = 6;
-		const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
-
-		await axios.get(url).then((json) => {
-			dispatch(setYoutube(json.data.items));
-		});
-	};
-
-	const getMembers = async () => {
-		const url = process.env.PUBLIC_URL + '/DB/members.json';
-		await axios.get(url).then((json) => {
-			dispatch(setMembers(json.data.members));
-		});
-	};
-
 	useEffect(() => {
-		getYoutube();
-		getMembers();
+		dispatch({ type: 'YOUTUBE_START' });
+		dispatch({ type: 'MEMBERS_START' });
 		dispatch({
 			type: 'FLICKR_START',
 			Opt: { type: 'user', user: '164021883@N04' },
