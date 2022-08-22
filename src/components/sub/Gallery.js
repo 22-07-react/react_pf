@@ -1,7 +1,6 @@
 import Layout from '../common/Layout';
 import Pop from '../common/Pop';
 import Masonry from 'react-masonry-component';
-import axios from 'axios';
 import { useEffect, useState, useRef } from 'react';
 
 function Gallery() {
@@ -16,34 +15,6 @@ function Gallery() {
 	const num = 50;
 	const user = '164021883@N04';
 
-	const getFlickr = async (opt) => {
-		const key = '4612601b324a2fe5a1f5f7402bf8d87a';
-		const method_interest = 'flickr.interestingness.getList';
-		const method_user = 'flickr.people.getPhotos';
-		const method_search = 'flickr.photos.search';
-		let url = '';
-		if (opt.type === 'interest') {
-			url = `https://www.flickr.com/services/rest/?method=${method_interest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
-		}
-		if (opt.type === 'user') {
-			url = `https://www.flickr.com/services/rest/?method=${method_user}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&user_id=${opt.user}`;
-		}
-		if (opt.type === 'search') {
-			url = `https://www.flickr.com/services/rest/?method=${method_search}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&tags=${opt.tag}`;
-		}
-
-		await axios.get(url).then((json) => {
-			console.log(json.data.photos.photo);
-			if (json.data.photos.photo.length === 0) return alert('해당 검색어의 결과값이 없습니다.');
-			setItems(json.data.photos.photo);
-		});
-
-		setTimeout(() => {
-			frame.current.classList.add('on');
-			setLoading(false);
-			setEnableClick(true);
-		}, 1000);
-	};
 	const showInterest = () => {
 		if (!EnableClick) return;
 		setLoading(true);
