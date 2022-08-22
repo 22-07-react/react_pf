@@ -3,6 +3,7 @@ import Pop from '../common/Pop';
 import Masonry from 'react-masonry-component';
 import { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import * as types from '../../redux/actionType';
 
 function Gallery() {
 	const dispatch = useDispatch();
@@ -59,7 +60,7 @@ function Gallery() {
 
 	//Opt값이 변경될떄마다 dispath로 변경된 해당 Opt값을 Flickr_start액션객체에 담아서 saga에 전달
 	useEffect(() => {
-		dispatch({ type: 'FLICKR_START', Opt });
+		dispatch({ type: types.FLICKR.start, Opt });
 	}, [Opt]);
 
 	//flickr데이터가 변경될때마다 (새로운데이터 요청을 해서 해당 요청이 완료될때마다) 로딩제거함수 호출
