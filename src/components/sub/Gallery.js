@@ -2,12 +2,15 @@ import Layout from '../common/Layout';
 import Pop from '../common/Pop';
 import Masonry from 'react-masonry-component';
 import { useEffect, useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Gallery() {
+	const dispatch = useDispatch();
 	const frame = useRef(null);
 	const input = useRef(null);
 	const pop = useRef(null);
-	const [Items, setItems] = useState([]);
+	//store에 있는 flickr데이터를 가져옴 (처음 사이클에서는 빈배열  가져옴)
+	const Pics = useSelector((store) => store.flickrReducer.flickr);
 	const [Index, setIndex] = useState(0);
 	const [Loading, setLoading] = useState(true);
 	const [EnableClick, setEnableClick] = useState(false);
@@ -29,18 +32,40 @@ function Gallery() {
 		setEnableClick(false);
 		setLoading(true);
 		frame.current.classList.remove('on');
-		getFlickr({ type: 'search', tag: result });
+		dispatch({
+			type: 'FLICKR_START',
+			Opt: {
+				type: 'search',
+				tag: result,
+			},
+		});
 		input.current.value = '';
 	};
 	const showUser = (e) => {
 		if (!EnableClick) return;
 		setLoading(true);
 		frame.current.classList.remove('on');
-		getFlickr({ type: 'user', user: e.target.getAttribute('user') });
+		dispatch({
+			type: 'FLICKR_START',
+			Opt: {
+				type: 'user',
+				user: e.target.getAttribute('user'),
+			},
+		});
 		setEnableClick(false);
 	};
 
-	useEffect(() => getFlickr({ type: 'user', user: user }), []);
+	//컴포넌트 마운트시
+	useEffect(() => {
+		dispatch({
+			//FLICKR_START액션타입의 액션 객체를 saga로 전달
+			type: 'FLICKR_START',
+			Opt: {
+				type: 'user',
+				user: user,
+			},
+		});
+	}, []);
 
 	return (
 		<>
@@ -65,7 +90,7 @@ function Gallery() {
 
 				<div className='frame' ref={frame}>
 					<Masonry elementType={'div'} options={masonryOptions}>
-						{Items.map((pic, idx) => {
+						{Pics.map((pic, idx) => {
 							return (
 								<article key={idx}>
 									<div className='inner'>
@@ -105,10 +130,10 @@ function Gallery() {
 			</Layout>
 
 			<Pop ref={pop}>
-				{Items.length !== 0 && (
+				{Pics.length !== 0 && (
 					<img
-						src={`https://live.staticflickr.com/${Items[Index].server}/${Items[Index].id}_${Items[Index].secret}_b.jpg`}
-						alt={Items[Index].title}
+						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
+						alt={Pics[Index].title}
 					/>
 				)}
 			</Pop>
