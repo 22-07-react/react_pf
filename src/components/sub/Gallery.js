@@ -11,7 +11,7 @@ function Gallery() {
 	const input = useRef(null);
 	const pop = useRef(null);
 	//store에 있는 flickr데이터를 가져옴 (처음 사이클에서는 빈배열  가져옴)
-	const Pics = useSelector((store) => store.flickrReducer.flickr);
+	const Pics = useSelector((store) => store.flickr.data);
 
 	const [Index, setIndex] = useState(0);
 	const [Loading, setLoading] = useState(true);

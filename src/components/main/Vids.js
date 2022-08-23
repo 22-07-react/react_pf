@@ -10,7 +10,7 @@ import Pop from '../common/Pop';
 function Vids() {
 	const pop = useRef(null);
 	const [Index, setIndex] = useState(0);
-	const { youtube } = useSelector((store) => store.youtubeReducer);
+	const youtube = useSelector((store) => store.youtube.data);
 
 	return (
 		<>

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 function News() {
 	const path = process.env.PUBLIC_URL;
-	const Members = useSelector((store) => store.memberReducer.members);
+	const Members = useSelector((store) => store.members.data);
 
 	const getLocalData = () => {
 		const dummyPosts = [
